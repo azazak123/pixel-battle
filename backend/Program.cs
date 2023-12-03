@@ -1,3 +1,4 @@
+using System.Text.Json;
 using backend.Models;
 using Services = backend.Services;
 
@@ -5,7 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder
+    .Services
+    .AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
+    });
+
 builder.Services.AddDbContext<PostgresContext>();
 builder
     .Services
