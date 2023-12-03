@@ -1,4 +1,5 @@
 using backend.Models;
+using Services = backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<PostgresContext>();
+builder
+    .Services
+    .AddSingleton<
+        Services.PasswordHasher.IPasswordHasher,
+        Services.PasswordHasher.PasswordHasherSHA512
+    >();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
