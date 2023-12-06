@@ -50,18 +50,18 @@ export type LoginRequestInput = {
 
 export type PixelResponse = {
   __typename?: 'PixelResponse';
-  authorId?: Maybe<Scalars['Int']['output']>;
-  color?: Maybe<Scalars['String']['output']>;
-  creationTime?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  x?: Maybe<Scalars['Int']['output']>;
-  y?: Maybe<Scalars['Int']['output']>;
+  authorId: Scalars['Int']['output'];
+  color: Scalars['String']['output'];
+  creationTime: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  x: Scalars['Int']['output'];
+  y: Scalars['Int']['output'];
 };
 
 export type PixelResponseResultResponse = {
   __typename?: 'PixelResponseResultResponse';
-  result?: Maybe<Scalars['Boolean']['output']>;
-  value?: Maybe<PixelResponse>;
+  result: Scalars['Boolean']['output'];
+  value: PixelResponse;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -99,21 +99,21 @@ export type String_Comparison_Exp = {
 
 export type User = {
   __typename?: 'User';
-  email?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  username?: Maybe<Scalars['String']['output']>;
+  email: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  username: Scalars['String']['output'];
 };
 
 export type UserResultResponse = {
   __typename?: 'UserResultResponse';
-  result?: Maybe<Scalars['Boolean']['output']>;
-  value?: Maybe<User>;
+  result: Scalars['Boolean']['output'];
+  value: User;
 };
 
 export type ValueTupleResultResponse = {
   __typename?: 'ValueTupleResultResponse';
-  result?: Maybe<Scalars['Boolean']['output']>;
-  value?: Maybe<Scalars['JSON']['output']>;
+  result: Scalars['Boolean']['output'];
+  value: Scalars['JSON']['output'];
 };
 
 /** Boolean expression to compare columns of type "bytea". All fields are combined with logical 'AND'. */
@@ -410,7 +410,46 @@ export type Timestamptz_Comparison_Exp = {
 };
 
 
+export const CreateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"createUserRequestInput"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"}},{"kind":"Field","name":{"kind":"Name","value":"value"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]} as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"loginRequestInput"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const ChangePixelColorDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChangePixelColor"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"color"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"x"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"y"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"change_pixel_color"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"createPixelRequestInput"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"color"},"value":{"kind":"Variable","name":{"kind":"Name","value":"color"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"x"},"value":{"kind":"Variable","name":{"kind":"Name","value":"x"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"y"},"value":{"kind":"Variable","name":{"kind":"Name","value":"y"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"}},{"kind":"Field","name":{"kind":"Name","value":"value"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"authorId"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"creationTime"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"x"}},{"kind":"Field","name":{"kind":"Name","value":"y"}}]}}]}}]}}]} as unknown as DocumentNode<ChangePixelColorMutation, ChangePixelColorMutationVariables>;
+export const CreatePixelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreatePixel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"x"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"y"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"color"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_pixel"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"createPixelRequestInput"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"x"},"value":{"kind":"Variable","name":{"kind":"Name","value":"x"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"y"},"value":{"kind":"Variable","name":{"kind":"Name","value":"y"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"color"},"value":{"kind":"Variable","name":{"kind":"Name","value":"color"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"}},{"kind":"Field","name":{"kind":"Name","value":"value"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"authorId"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"creationTime"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"x"}},{"kind":"Field","name":{"kind":"Name","value":"y"}}]}}]}}]}}]} as unknown as DocumentNode<CreatePixelMutation, CreatePixelMutationVariables>;
 export const GetPixelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPixels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pixel_battle_pixel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"author_id"}},{"kind":"Field","name":{"kind":"Name","value":"creation_time"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"x"}},{"kind":"Field","name":{"kind":"Name","value":"y"}}]}}]}}]} as unknown as DocumentNode<GetPixelsQuery, GetPixelsQueryVariables>;
+export type CreateUserMutationVariables = Exact<{
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  username: Scalars['String']['input'];
+}>;
+
+
+export type CreateUserMutation = { __typename?: 'mutation_root', create_user?: { __typename?: 'UserResultResponse', result: boolean, value: { __typename?: 'User', email: string, id: number, username: string } } | null };
+
+export type LoginMutationVariables = Exact<{
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+}>;
+
+
+export type LoginMutation = { __typename?: 'mutation_root', login?: { __typename?: 'ValueTupleResultResponse', result: boolean, value: any } | null };
+
+export type ChangePixelColorMutationVariables = Exact<{
+  color: Scalars['String']['input'];
+  x: Scalars['Int']['input'];
+  y: Scalars['Int']['input'];
+}>;
+
+
+export type ChangePixelColorMutation = { __typename?: 'mutation_root', change_pixel_color?: { __typename?: 'PixelResponseResultResponse', result: boolean, value: { __typename?: 'PixelResponse', authorId: number, color: string, creationTime: string, id: number, x: number, y: number } } | null };
+
+export type CreatePixelMutationVariables = Exact<{
+  x: Scalars['Int']['input'];
+  y: Scalars['Int']['input'];
+  color: Scalars['String']['input'];
+}>;
+
+
+export type CreatePixelMutation = { __typename?: 'mutation_root', create_pixel?: { __typename?: 'PixelResponseResultResponse', result: boolean, value: { __typename?: 'PixelResponse', authorId: number, color: string, creationTime: string, id: number, x: number, y: number } } | null };
+
 export type GetPixelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
