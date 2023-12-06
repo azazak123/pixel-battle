@@ -1,4 +1,9 @@
-import { GetPixelsDocument } from "../generated/graphql";
+import {
+  ChangePixelColorDocument,
+  CreatePixelDocument,
+  GetPixelsDocument,
+  Pixel_Battle_Pixel,
+} from "../generated/graphql";
 import { graphqlClient } from "../graphql/graphqlClient";
 
 type Self = {
@@ -9,6 +14,7 @@ type Self = {
   readonly ctx: CanvasRenderingContext2D;
   readonly colorPicker: HTMLInputElement;
   readonly scale: number;
+  readonly pixels: Omit<Pixel_Battle_Pixel, "__typename">[];
 };
 
 export async function create(
@@ -37,6 +43,7 @@ export async function create(
     ctx,
     colorPicker,
     scale,
+    pixels: [],
   };
 
   await ctxInit(self);
@@ -45,19 +52,53 @@ export async function create(
   return self;
 }
 
-function setPixel(
-  { canvas, ctx, colorPicker, scale }: Self,
+async function setPixel(
+  { canvas, ctx, colorPicker, scale, pixels }: Self,
   event: MouseEvent
 ) {
   const rect = canvas.getBoundingClientRect();
   const x = Math.round((event.clientX - rect.left) / scale);
   const y = Math.round((event.clientY - rect.top) / scale);
 
+  const color = btoa(
+    colorPicker.value
+      .match(/\w{2}/g)!
+      .map((a) => String.fromCharCode(parseInt(a, 16)))
+      .join("")
+  );
+
+  const index = pixels.findIndex((pixel) => pixel.x == x && pixel.y == y);
+  const isExist = index !== -1;
+
+  if (isExist) {
+    const data = (
+      await graphqlClient
+        .mutation(ChangePixelColorDocument, { x, y, color })
+        .toPromise()
+    ).data;
+
+    if (data === undefined)
+      throw new Error("Pixel color have not been changed");
+
+    pixels[index] = data.change_pixel_color?.value!;
+  } else {
+    const data = (
+      await graphqlClient
+        .mutation(CreatePixelDocument, { x, y, color })
+        .toPromise()
+    ).data;
+
+    if (data === undefined)
+      throw new Error("Pixel color have not been created");
+
+    pixels.push(data.create_pixel?.value!);
+  }
+
   ctx.fillStyle = colorPicker.value;
   ctx.fillRect(x, y, 1, 1);
 }
 
-async function ctxInit({ width, height, ctx, scale }: Self) {
+async function ctxInit({ width, height, ctx, scale, pixels }: Self) {
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, width, height);
 
@@ -74,8 +115,10 @@ async function ctxInit({ width, height, ctx, scale }: Self) {
     ctx.fillStyle = color;
     ctx.fillRect(pixel.x, pixel.y, 1, 1);
   }
+
+  pixels.concat(result.pixel_battle_pixel);
 }
 
 function listenersInit(self: Self) {
-  self.canvas.addEventListener("click", (e) => setPixel(self, e));
+  self.canvas.addEventListener("click", async (e) => await setPixel(self, e));
 }
