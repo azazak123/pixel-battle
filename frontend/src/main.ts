@@ -14,7 +14,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   </div>
 `;
 
-field.create(
+await field.create(
   document.querySelector<HTMLButtonElement>("#field")!,
   width,
   height,

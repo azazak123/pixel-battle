@@ -1,0 +1,10 @@
+query GetPixels {
+  pixel_battle_pixel {
+    color
+    author_id
+    creation_time
+    id
+    x
+    y
+  }
+}
