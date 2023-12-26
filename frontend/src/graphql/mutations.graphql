@@ -1,0 +1,51 @@
+mutation CreateUser($email: String!, $password: String!, $username: String!) {
+  create_user(
+    createUserRequestInput: {
+      email: $email
+      password: $password
+      username: $username
+    }
+  ) {
+    result
+    value {
+      email
+      id
+      username
+    }
+  }
+}
+
+mutation Login($email: String!, $password: String!) {
+  login(loginRequestInput: { email: $email, password: $password }) {
+    result
+    value
+  }
+}
+
+mutation ChangePixelColor($color: String!, $x: Int!, $y: Int!) {
+  change_pixel_color(createPixelRequestInput: { color: $color, x: $x, y: $y }) {
+    result
+    value {
+      author_id
+      color
+      creation_time
+      id
+      x
+      y
+    }
+  }
+}
+
+mutation CreatePixel($x: Int!, $y: Int!, $color: String!) {
+  create_pixel(createPixelRequestInput: { x: $x, y: $y, color: $color }) {
+    result
+    value {
+      author_id
+      color
+      creation_time
+      id
+      x
+      y
+    }
+  }
+}
